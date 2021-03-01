@@ -3,7 +3,6 @@ const path = require('path');
 module.exports = {
     entry: './src/index.ts',
     devtool: 'inline-source-map',
-    watch: true,
     mode: "development",
     module: {
         rules: [
@@ -22,7 +21,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
     },
     devServer: {
-        contentBase: path.join(__dirname, 'dist'),
+        contentBase: path.join(__dirname, 'public'),
         compress: true,
         port: 9000,
         liveReload: true

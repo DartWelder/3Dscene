@@ -1,18 +1,22 @@
 {
-    "name": "3dcanvas",
+    "name": "3Dscene",
     "version": "1.0.0",
     "description": "",
     "private": true,
     "dependencies": {
         "codelyzer": "^6.0.1",
+        "mathjs": "^9.2.0",
         "tslint": "^6.1.3",
         "tslint-eslint-rules": "^5.4.0"
     },
     "devDependencies": {
+        "@types/mathjs": "^6.0.11",
+        "@webpack-cli/serve": "^1.3.0",
+        "html-webpack-plugin": "^5.2.0",
         "ts-loader": "^8.0.14",
         "typescript": "^4.1.3",
-        "webpack": "^5.19.0",
-        "webpack-cli": "^4.4.0",
+        "webpack": "^5.24.2",
+        "webpack-cli": "^4.5.0",
         "webpack-dev-server": "^3.11.2"
     },
     "scripts": {

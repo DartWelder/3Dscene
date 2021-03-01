@@ -1,8 +1,8 @@
 export class Canvas {
     readonly cnv: HTMLCanvasElement;
-    private ctx: CanvasRenderingContext2D;
-    private w: number;
-    private h: number;
+    public ctx: CanvasRenderingContext2D;
+    w: number;
+    h: number;
 
     constructor() {
         this.cnv = document.createElement('canvas');
@@ -16,7 +16,7 @@ export class Canvas {
         this.h = this.cnv.height = innerHeight;
     }
 
-    clearCanvas() {
-        this.ctx.clearRect(0, 0, this.w, this.h)
+    clearCanvas(): void {
+        this.ctx.clearRect(0, 0, this.w, this.h);
     }
 }
