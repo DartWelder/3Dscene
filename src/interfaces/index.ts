@@ -6,5 +6,17 @@ export interface IPosition {
 }
 
 // tslint:disable-next-line:no-empty-interface
-export interface IVertex extends IPosition {
+export type Vertex = number[];
+
+export interface IOBJ {
+    vertices: number[];
+    zzz: any;
 }
+
+export interface IRotateParams {
+    x?: number;
+    y?: number;
+    z?: number
+}
+
+export interface ITranslateParams extends IRotateParams {}

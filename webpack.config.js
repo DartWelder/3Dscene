@@ -1,4 +1,5 @@
 const path = require('path');
+const htmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: './src/index.ts',
@@ -11,7 +12,22 @@ module.exports = {
                 use: 'ts-loader',
                 exclude: /node_modules/,
             },
-        ],
+            {
+                test: /\.s[ac]ss$/i,
+                use: [
+                    // Creates `style` nodes from JS strings
+                    "style-loader",
+                    // Translates CSS into CommonJS
+                    "css-loader",
+                    // Compiles Sass to CSS
+                    "sass-loader",
+                ],
+            },
+            {
+                test: /\.obj$/,
+                use: ['webpack-obj-loader']
+            }
+        ]
     },
     resolve: {
         extensions: ['.ts', '.js'],
@@ -25,5 +41,8 @@ module.exports = {
         compress: true,
         port: 9000,
         liveReload: true
-    }
+    },
+    plugins: [
+        new htmlWebpackPlugin()
+    ]
 };
