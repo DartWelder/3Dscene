@@ -16,14 +16,14 @@ export class Scene {
     ctx: CanvasRenderingContext2D;
     view: Matrix;
     model: Base;
+    private viewProjection: Matrix;
 
     constructor(cnv: Canvas) {
         this.cnv = cnv;
         this.ctx = cnv.ctx;
         this.setView();
         this.setListeners();
-        console.log('%c  model  ', 'color: green; background: #222; font-size: 22px;', model)
-        this.model = new Base(model, { scale: 10, rotate: { z: 180 }, translate:  { y: -100 } });
+        this.model = new Base(model, { scale: 8, rotate: { z: 180 }, translate:  { y: -80 } });
     }
 
     get projection(): Matrix {
@@ -47,7 +47,7 @@ export class Scene {
             const triangleVertices = [];
             for (let j = 0; j < 3; j++) {
                 const vertex = this.model.vertices[i + j];
-                const [x1, y1, z1, w1] = multiply(multiply(this.projection, this.view), vertex).toArray() as Vertex;
+                const [x1, y1, z1, w1] = multiply(this.viewProjection, vertex).toArray() as Vertex;
                 triangleVertices.push([(x1 / w1 + 1) / 2 * this.cnv.w, (y1 / w1 + 1) / 2 * this.cnv.h]);
             }
             this.ctx.beginPath();
@@ -64,7 +64,7 @@ export class Scene {
 
     drawVertices(): void {
         for (const vertex of this.model.vertices) {
-            const [x1, y1, z1, w1] = multiply(multiply(this.projection, this.view), vertex).toArray() as Vertex;
+            const [x1, y1, z1, w1] = multiply(this.viewProjection, vertex).toArray() as Vertex;
             const [xe, ye] = [(x1 / w1 + 1) / 2 * this.cnv.w, (y1 / w1 + 1) / 2 * this.cnv.h];
             this.ctx.beginPath();
             this.ctx.fillStyle = this.ctx.strokeStyle = 'white';
@@ -77,6 +77,7 @@ export class Scene {
 
     setView(): void {
         this.view = Matrices.getView(this.cnv.w, this.cnv.h, this.zFar, this.zNear);
+        this.viewProjection = multiply(this.projection, this.view);
     }
 
     private setListeners(): void {
